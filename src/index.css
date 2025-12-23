@@ -271,3 +271,194 @@
 .delay-500 {
   animation-delay: 500ms;
 }
+
+/* ================================================
+   Phase 3: Micro-animations & Interaction Design
+   ================================================ */
+
+/* Shimmer skeleton loading effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg,
+      hsl(0 0% 18%) 25%,
+      hsl(30 45% 65% / 0.15) 50%,
+      hsl(0 0% 18%) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Gold spinner for loading states */
+@keyframes spin-gold {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-gold {
+  animation: spin-gold 800ms linear infinite;
+}
+
+/* Shake animation for errors */
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  20%,
+  60% {
+    transform: translateX(-5px);
+  }
+
+  40%,
+  80% {
+    transform: translateX(5px);
+  }
+}
+
+.animate-shake {
+  animation: shake 300ms ease-in-out;
+}
+
+/* Pulse ring for button clicks */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 500ms ease-out forwards;
+}
+
+/* Float animation for empty states */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Slide in from right for toasts */
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 300ms ease-out forwards;
+}
+
+/* Scale pulse for success feedback */
+@keyframes scale-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.animate-scale-pulse {
+  animation: scale-pulse 400ms ease-in-out;
+}
+
+/* Enhanced card hover with increased lift */
+.card-hover-enhanced {
+  @apply transition-all duration-200 ease-out;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.card-hover-enhanced:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  filter: brightness(1.05);
+}
+
+.card-hover-enhanced:active {
+  transform: translateY(-4px) scale(0.98);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Button interaction enhancements */
+.btn-interactive {
+  @apply transition-all duration-150 ease-out;
+}
+
+.btn-interactive:hover {
+  transform: scale(1.02);
+}
+
+.btn-interactive:active {
+  transform: scale(0.98);
+}
+
+/* Focus accessibility - Gold ring */
+.focus-gold:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--primary));
+}
+
+/* Input focus states */
+.input-focus:focus {
+  border-color: hsl(var(--primary));
+  box-shadow: 0 0 0 4px hsl(30 45% 65% / 0.2);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-shimmer,
+  .animate-float,
+  .pulse-badge {
+    animation: none;
+  }
+}

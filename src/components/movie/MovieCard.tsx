@@ -22,7 +22,7 @@ export function MovieCard({ movie, className }: MovieCardProps) {
   return (
     <Link
       to={`/movie/${movie.id}`}
-      className={cn("group relative card-hover block cursor-pointer rounded-xl", className)}
+      className={cn("group relative card-hover-enhanced block cursor-pointer rounded-xl focus-gold", className)}
     >
       {/* Poster Container */}
       <div className="relative aspect-[2/3] rounded-xl overflow-hidden bg-muted">
