@@ -32,9 +32,9 @@ export function HeroSection({ movie }: HeroSectionProps) {
           </Badge>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight animate-slide-up">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground leading-tight animate-slide-up">
             {movie.title.split(":")[0]}:
-            <span className="text-gradient-lime block">
+            <span className="text-gradient-gold block">
               {movie.title.split(":")[1] || ""}
             </span>
           </h1>
@@ -73,7 +73,7 @@ export function HeroSection({ movie }: HeroSectionProps) {
               </Button>
             </Link>
             <Link to={`/movie/${movie.id}`}>
-              <Button variant="outline" size="lg" className="gap-2">
+              <Button variant="outline" size="lg" className="gap-2 border-accent hover:bg-accent/10">
                 <Play className="w-5 h-5" />
                 Xem Trailer
               </Button>

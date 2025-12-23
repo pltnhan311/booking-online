@@ -19,6 +19,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
+        display: ["Cinzel", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -58,6 +59,7 @@ export default {
         },
         cinema: {
           gold: "hsl(var(--cinema-gold))",
+          copper: "hsl(var(--cinema-copper))",
           red: "hsl(var(--cinema-red))",
           success: "hsl(var(--cinema-success))",
           warning: "hsl(var(--cinema-warning))",

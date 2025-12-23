@@ -1,81 +1,83 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* VietCinema Design System - Dark Cinema Theme with Lime Accent */
+/* VietCinema Design System - Premium Cinema Theme */
 
 @layer base {
   :root {
-    /* Core backgrounds */
-    --background: 0 0% 8%;
-    --background-elevated: 0 0% 12%;
-    --foreground: 0 0% 100%;
+    /* Core backgrounds - Rich Charcoal */
+    --background: 0 0% 10%;
+    --background-elevated: 0 0% 14%;
+    --foreground: 40 30% 96%;
 
-    /* Card & Surface */
-    --card: 0 0% 12%;
-    --card-foreground: 0 0% 100%;
-    --card-hover: 0 0% 15%;
+    /* Card & Surface - Warm Gray */
+    --card: 0 0% 18%;
+    --card-foreground: 40 30% 96%;
+    --card-hover: 0 0% 22%;
 
-    --popover: 0 0% 12%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 16%;
+    --popover-foreground: 40 30% 96%;
 
-    /* Primary - Lime/Chartreuse accent */
-    --primary: 76 90% 50%;
-    --primary-foreground: 0 0% 5%;
-    --primary-glow: 76 90% 60%;
+    /* Primary - Deep Gold */
+    --primary: 30 45% 65%;
+    --primary-foreground: 0 0% 10%;
+    --primary-glow: 30 50% 70%;
 
     /* Secondary - Dark surfaces */
-    --secondary: 0 0% 15%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 40 30% 96%;
 
     /* Muted text and surfaces */
-    --muted: 0 0% 18%;
-    --muted-foreground: 0 0% 65%;
+    --muted: 0 0% 22%;
+    --muted-foreground: 0 0% 42%;
 
-    /* Accent - Same as primary for consistency */
-    --accent: 76 90% 50%;
-    --accent-foreground: 0 0% 5%;
+    /* Accent - Copper for interactions */
+    --accent: 24 53% 51%;
+    --accent-foreground: 40 30% 96%;
 
-    /* Destructive - Red for errors and sold seats */
+    /* Destructive - Red for errors */
     --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 40 30% 96%;
 
     /* Cinema-specific colors */
-    --cinema-gold: 45 100% 50%;
-    --cinema-red: 0 84% 55%;
-    --cinema-success: 142 76% 45%;
+    --cinema-gold: 30 45% 65%;
+    --cinema-copper: 24 53% 51%;
+    --cinema-red: 5 54% 56%;
+    --cinema-success: 142 70% 45%;
     --cinema-warning: 38 92% 50%;
-    --cinema-surface: 0 0% 12%;
+    --cinema-surface: 0 0% 18%;
 
     /* Seat colors */
-    --seat-available: 142 76% 45%;
-    --seat-selected: 38 92% 50%;
-    --seat-sold: 0 72% 51%;
-    --seat-vip: 45 100% 50%;
+    --seat-available: 0 0% 28%;
+    --seat-selected: 30 45% 65%;
+    --seat-sold: 0 50% 45%;
+    --seat-vip: 30 60% 55%;
 
     /* Borders and inputs */
-    --border: 0 0% 20%;
+    --border: 0 0% 24%;
     --input: 0 0% 20%;
-    --ring: 76 90% 50%;
+    --ring: 30 45% 65%;
 
     --radius: 0.75rem;
 
     /* Sidebar */
-    --sidebar-background: 0 0% 10%;
-    --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 76 90% 50%;
-    --sidebar-primary-foreground: 0 0% 5%;
-    --sidebar-accent: 0 0% 15%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 76 90% 50%;
+    --sidebar-background: 0 0% 12%;
+    --sidebar-foreground: 40 20% 85%;
+    --sidebar-primary: 30 45% 65%;
+    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-accent: 0 0% 18%;
+    --sidebar-accent-foreground: 40 30% 96%;
+    --sidebar-border: 0 0% 20%;
+    --sidebar-ring: 30 45% 65%;
 
     /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 8% / 0.9), hsl(0 0% 8% / 0.6));
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 15%), hsl(0 0% 10%));
-    --gradient-lime: linear-gradient(135deg, hsl(76 90% 50%), hsl(76 90% 40%));
+    --gradient-hero: linear-gradient(135deg, hsl(0 0% 10% / 0.95), hsl(0 0% 10% / 0.6));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 20%), hsl(0 0% 14%));
+    --gradient-gold: linear-gradient(135deg, hsl(30 45% 65%), hsl(24 53% 51%));
   }
 }
 
@@ -114,34 +116,60 @@
 }
 
 @layer utilities {
-  /* Text gradient utility */
-  .text-gradient-lime {
+
+  /* Text gradient utility - Gold */
+  .text-gradient-gold {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(76 90% 50%), hsl(76 90% 70%));
+    background-image: linear-gradient(135deg, hsl(30 45% 65%), hsl(24 53% 51%));
   }
 
-  /* Glow effects */
-  .glow-lime {
-    box-shadow: 0 0 30px hsl(76 90% 50% / 0.3);
+  /* Glow effects - Gold */
+  .glow-gold {
+    box-shadow: 0 0 30px hsl(30 45% 65% / 0.3);
   }
 
-  .glow-lime-sm {
-    box-shadow: 0 0 15px hsl(76 90% 50% / 0.25);
+  .glow-gold-sm {
+    box-shadow: 0 0 15px hsl(30 45% 65% / 0.25);
   }
 
-  /* Card hover animation */
+  /* Card hover animation - Premium shadows */
   .card-hover {
-    @apply transition-all duration-300 ease-out;
+    @apply transition-all duration-200 ease-out;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
   }
 
   .card-hover:hover {
     @apply -translate-y-1;
-    box-shadow: 0 20px 40px hsl(0 0% 0% / 0.5);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
   }
 
-  /* Button hover effects */
+  /* Button styles - Gold primary with shine */
+  .btn-gold {
+    @apply bg-primary text-primary-foreground font-semibold;
+    background-image: linear-gradient(135deg, hsl(30 45% 65%), hsl(30 50% 60%));
+    box-shadow: inset 0 1px 0 hsl(30 50% 75% / 0.3);
+  }
+
+  .btn-gold:hover {
+    background-image: linear-gradient(135deg, hsl(24 53% 51%), hsl(24 53% 46%));
+  }
+
+  .btn-gold:active {
+    transform: scale(0.98);
+  }
+
+  /* Button styles - Copper outlined */
+  .btn-copper-outline {
+    @apply border-2 border-accent bg-transparent text-foreground font-semibold;
+  }
+
+  .btn-copper-outline:hover {
+    background: hsl(var(--accent) / 0.1);
+  }
+
+  /* Button glow effect */
   .btn-glow:hover {
-    box-shadow: 0 0 25px hsl(76 90% 50% / 0.4);
+    box-shadow: 0 0 25px hsl(30 45% 65% / 0.4);
   }
 
   /* Seat styling */
@@ -175,21 +203,17 @@
 
   /* Hero gradient overlay */
   .hero-gradient {
-    background: linear-gradient(
-      to right,
-      hsl(0 0% 8% / 0.95) 0%,
-      hsl(0 0% 8% / 0.8) 50%,
-      hsl(0 0% 8% / 0.4) 100%
-    );
+    background: linear-gradient(to right,
+        hsl(0 0% 8% / 0.95) 0%,
+        hsl(0 0% 8% / 0.8) 50%,
+        hsl(0 0% 8% / 0.4) 100%);
   }
 
   /* Bottom gradient fade */
   .gradient-fade-bottom {
-    background: linear-gradient(
-      to top,
-      hsl(0 0% 8%) 0%,
-      transparent 100%
-    );
+    background: linear-gradient(to top,
+        hsl(0 0% 8%) 0%,
+        transparent 100%);
   }
 
   /* Animate on scroll */
@@ -202,6 +226,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -214,9 +239,12 @@
   }
 
   @keyframes pulseBadge {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 1;
     }
+
     50% {
       opacity: 0.7;
     }
@@ -224,8 +252,22 @@
 }
 
 /* Animation delays for staggered effects */
-.delay-100 { animation-delay: 100ms; }
-.delay-200 { animation-delay: 200ms; }
-.delay-300 { animation-delay: 300ms; }
-.delay-400 { animation-delay: 400ms; }
-.delay-500 { animation-delay: 500ms; }
+.delay-100 {
+  animation-delay: 100ms;
+}
+
+.delay-200 {
+  animation-delay: 200ms;
+}
+
+.delay-300 {
+  animation-delay: 300ms;
+}
+
+.delay-400 {
+  animation-delay: 400ms;
+}
+
+.delay-500 {
+  animation-delay: 500ms;
+}
