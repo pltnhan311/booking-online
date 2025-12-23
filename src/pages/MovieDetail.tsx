@@ -1,11 +1,12 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { ArrowLeft, Star, Clock, Calendar, Users, Play, Ticket } from "lucide-react";
+import { ArrowLeft, Star, Clock, Calendar, Play, Ticket } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { getMovieById, formatDate } from "@/data/mockData";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { cn } from "@/lib/utils";
 
 export default function MovieDetail() {
   const { id } = useParams<{ id: string }>();
@@ -37,8 +38,8 @@ export default function MovieDetail() {
             alt={movie.title}
             className="w-full h-full object-cover object-top"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
-          <div className="absolute inset-0 hero-gradient" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
+          <div className="absolute inset-0 hero-gradient-light" />
         </div>
 
         {/* Back Button */}
@@ -47,7 +48,7 @@ export default function MovieDetail() {
             variant="ghost"
             size="sm"
             onClick={() => navigate(-1)}
-            className="gap-2 text-muted-foreground hover:text-foreground"
+            className="gap-2"
           >
             <ArrowLeft className="w-4 h-4" />
             Quay lại
@@ -59,22 +60,22 @@ export default function MovieDetail() {
           <div className="flex flex-col md:flex-row gap-8">
             {/* Poster */}
             <div className="shrink-0 mx-auto md:mx-0">
-              <div className="relative w-64 md:w-80 aspect-[2/3] rounded-xl overflow-hidden shadow-2xl">
+              <div className="relative w-64 md:w-80 aspect-[2/3] rounded-2xl overflow-hidden shadow-elevated bg-card p-2">
                 <img
                   src={movie.posterUrl}
                   alt={movie.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-xl"
                 />
                 {/* Play Trailer Overlay */}
                 <Dialog open={showTrailer} onOpenChange={setShowTrailer}>
                   <DialogTrigger asChild>
-                    <button className="absolute inset-0 flex items-center justify-center bg-background/50 opacity-0 hover:opacity-100 transition-opacity group">
-                      <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <button className="absolute inset-2 flex items-center justify-center bg-foreground/30 rounded-xl opacity-0 hover:opacity-100 transition-opacity group">
+                      <div className="w-16 h-16 rounded-full bg-primary flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
                         <Play className="w-8 h-8 text-primary-foreground fill-primary-foreground ml-1" />
                       </div>
                     </button>
                   </DialogTrigger>
-                  <DialogContent className="max-w-4xl p-0 bg-background border-border overflow-hidden">
+                  <DialogContent className="max-w-4xl p-0 overflow-hidden shadow-elevated">
                     <div className="aspect-video">
                       <iframe
                         src={movie.trailerUrl}
@@ -94,19 +95,20 @@ export default function MovieDetail() {
               {/* Badges */}
               <div className="flex flex-wrap gap-2">
                 {movie.badges?.map((badge) => (
-                  <Badge key={badge} variant="secondary" className="text-xs">
+                  <Badge
+                    key={badge}
+                    variant={badge === "HOT" ? "hot" : "secondary"}
+                  >
                     {badge}
                   </Badge>
                 ))}
                 <Badge
-                  variant="outline"
-                  className={
-                    movie.ageRating.includes("18")
-                      ? "bg-destructive text-foreground border-none"
-                      : movie.ageRating.includes("16")
-                      ? "bg-cinema-warning text-background border-none"
-                      : "bg-cinema-success text-background border-none"
+                  variant={
+                    movie.ageRating.includes("18") ? "destructive" :
+                      movie.ageRating.includes("16") ? "warning" :
+                        "success"
                   }
+                  className="font-bold"
                 >
                   {movie.ageRating}
                 </Badge>
@@ -114,7 +116,7 @@ export default function MovieDetail() {
 
               {/* Title */}
               <div>
-                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2">
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold text-foreground mb-2">
                   {movie.title}
                 </h1>
                 <p className="text-lg text-muted-foreground">{movie.titleEn}</p>
@@ -140,27 +142,29 @@ export default function MovieDetail() {
               {/* Genres */}
               <div className="flex flex-wrap gap-2">
                 {movie.genre.map((g) => (
-                  <Badge key={g} variant="outline" className="text-sm">
+                  <Badge key={g} variant="outline">
                     {g}
                   </Badge>
                 ))}
               </div>
 
               {/* Description */}
-              <p className="text-muted-foreground leading-relaxed">{movie.description}</p>
+              <div className="bg-card rounded-2xl p-5 shadow-subtle">
+                <p className="text-muted-foreground leading-relaxed">{movie.description}</p>
+              </div>
 
               {/* Cast & Crew */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-card rounded-2xl p-5 shadow-subtle">
                 <div>
-                  <h3 className="text-sm font-semibold text-muted-foreground mb-2">Đạo diễn</h3>
-                  <p className="text-foreground">{movie.director}</p>
+                  <h3 className="text-sm font-semibold text-muted-foreground mb-2 uppercase tracking-wide">Đạo diễn</h3>
+                  <p className="text-foreground font-medium">{movie.director}</p>
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-muted-foreground mb-2">Diễn viên</h3>
+                  <h3 className="text-sm font-semibold text-muted-foreground mb-2 uppercase tracking-wide">Diễn viên</h3>
                   <p className="text-foreground">{movie.cast.join(", ")}</p>
                 </div>
                 <div>
-                  <h3 className="text-sm font-semibold text-muted-foreground mb-2">Ngôn ngữ</h3>
+                  <h3 className="text-sm font-semibold text-muted-foreground mb-2 uppercase tracking-wide">Ngôn ngữ</h3>
                   <p className="text-foreground">{movie.language}</p>
                 </div>
               </div>

@@ -12,7 +12,7 @@ export function QuickBookingBar() {
   const [selectedDate, setSelectedDate] = useState("");
 
   const nowShowingMovies = movies.filter((m) => m.status === "now_showing");
-  
+
   // Generate next 7 days
   const dates = Array.from({ length: 7 }, (_, i) => {
     const date = new Date();
@@ -30,14 +30,16 @@ export function QuickBookingBar() {
   };
 
   return (
-    <div className="bg-secondary/80 backdrop-blur-sm border-y border-border">
-      <div className="container py-4">
-        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-4">
+    <div className="bg-card border-y border-border shadow-subtle">
+      <div className="container py-5">
+        <div className="flex flex-col md:flex-row items-stretch md:items-end gap-4">
           {/* Movie Select */}
           <div className="flex-1 min-w-0">
-            <label className="text-xs text-muted-foreground mb-1 block">CHỌN PHIM</label>
+            <label className="text-xs font-medium text-muted-foreground mb-1.5 block uppercase tracking-wide">
+              Chọn phim
+            </label>
             <Select value={selectedMovie} onValueChange={setSelectedMovie}>
-              <SelectTrigger className="bg-background/50 border-border h-11">
+              <SelectTrigger className="bg-secondary border-border h-12 hover:border-primary focus:border-primary transition-all">
                 <div className="flex items-center gap-2">
                   <Film className="w-4 h-4 text-primary" />
                   <SelectValue placeholder="Chọn phim..." />
@@ -55,9 +57,11 @@ export function QuickBookingBar() {
 
           {/* Theater Select */}
           <div className="flex-1 min-w-0">
-            <label className="text-xs text-muted-foreground mb-1 block">CHỌN RẠP</label>
+            <label className="text-xs font-medium text-muted-foreground mb-1.5 block uppercase tracking-wide">
+              Chọn rạp
+            </label>
             <Select value={selectedTheater} onValueChange={setSelectedTheater}>
-              <SelectTrigger className="bg-background/50 border-border h-11">
+              <SelectTrigger className="bg-secondary border-border h-12 hover:border-primary focus:border-primary transition-all">
                 <div className="flex items-center gap-2">
                   <MapPin className="w-4 h-4 text-primary" />
                   <SelectValue placeholder="Tất cả các rạp" />
@@ -75,9 +79,11 @@ export function QuickBookingBar() {
 
           {/* Date Select */}
           <div className="flex-1 min-w-0">
-            <label className="text-xs text-muted-foreground mb-1 block">CHỌN NGÀY</label>
+            <label className="text-xs font-medium text-muted-foreground mb-1.5 block uppercase tracking-wide">
+              Chọn ngày
+            </label>
             <Select value={selectedDate} onValueChange={setSelectedDate}>
-              <SelectTrigger className="bg-background/50 border-border h-11">
+              <SelectTrigger className="bg-secondary border-border h-12 hover:border-primary focus:border-primary transition-all">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4 text-primary" />
                   <SelectValue placeholder="Hôm nay" />
@@ -94,11 +100,11 @@ export function QuickBookingBar() {
           </div>
 
           {/* Book Button */}
-          <div className="md:pt-5">
+          <div className="md:pb-0">
             <Button
               variant="hero"
               size="lg"
-              className="w-full md:w-auto gap-2"
+              className="w-full md:w-auto h-12 gap-2"
               onClick={handleQuickBook}
               disabled={!selectedMovie}
             >

@@ -1,85 +1,436 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* VietCinema Design System - Premium Cinema Theme */
+/* ============================================
+   VietCinema Multi-Theme Design System
+   5 Themes × 2 Modes = 10 Color Schemes
+   ============================================ */
 
 @layer base {
-  :root {
-    /* Core backgrounds - Rich Charcoal */
+  /* ============================================
+     THEME 1: Purple (Default)
+     ============================================ */
+
+  /* Purple Light Mode */
+  :root,
+  [data-theme="purple"][data-mode="light"] {
+    --background: 0 0% 98%;
+    --background-elevated: 210 20% 98%;
+    --foreground: 220 13% 18%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 18%;
+    --card-hover: 270 50% 99%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 18%;
+    --primary: 258 90% 66%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 258 90% 58%;
+    --secondary: 210 20% 98%;
+    --secondary-foreground: 215 16% 47%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 168 76% 42%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 13% 91%;
+    --input: 210 20% 98%;
+    --ring: 258 90% 66%;
+    --radius: 0.75rem;
+
+    /* Cinema colors */
+    --cinema-primary: 258 90% 66%;
+    --cinema-accent: 168 76% 42%;
+    --cinema-coral: 0 84% 71%;
+    --cinema-success: 160 84% 39%;
+    --cinema-warning: 38 92% 50%;
+    --cinema-gold: 45 93% 58%;
+
+    /* Seats */
+    --seat-available: 210 20% 96%;
+    --seat-selected: 258 90% 66%;
+    --seat-sold: 0 50% 90%;
+    --seat-vip: 258 90% 95%;
+  }
+
+  /* Purple Dark Mode */
+  [data-theme="purple"][data-mode="dark"] {
+    --background: 270 20% 6%;
+    --background-elevated: 270 15% 10%;
+    --foreground: 0 0% 95%;
+    --card: 270 15% 12%;
+    --card-foreground: 0 0% 95%;
+    --card-hover: 270 20% 16%;
+    --popover: 270 15% 10%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 258 80% 70%;
+    --primary-foreground: 270 20% 6%;
+    --primary-hover: 258 80% 75%;
+    --secondary: 270 15% 15%;
+    --secondary-foreground: 0 0% 80%;
+    --muted: 270 10% 20%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 168 70% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 270 10% 20%;
+    --input: 270 15% 15%;
+    --ring: 258 80% 70%;
+
+    --cinema-primary: 258 80% 70%;
+    --cinema-accent: 168 70% 50%;
+    --cinema-coral: 0 72% 60%;
+    --cinema-success: 160 70% 45%;
+    --cinema-warning: 38 90% 55%;
+    --cinema-gold: 45 90% 60%;
+
+    --seat-available: 270 10% 20%;
+    --seat-selected: 258 80% 70%;
+    --seat-sold: 0 50% 30%;
+    --seat-vip: 258 50% 25%;
+  }
+
+  /* ============================================
+     THEME 2: Charcoal (Gold & Black)
+     ============================================ */
+
+  /* Charcoal Light Mode */
+  [data-theme="charcoal"][data-mode="light"] {
+    --background: 40 20% 98%;
+    --background-elevated: 40 15% 96%;
+    --foreground: 30 10% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 30 10% 15%;
+    --card-hover: 40 30% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 10% 15%;
+    --primary: 43 74% 49%;
+    --primary-foreground: 30 10% 10%;
+    --primary-hover: 43 74% 42%;
+    --secondary: 40 15% 96%;
+    --secondary-foreground: 30 10% 40%;
+    --muted: 40 10% 94%;
+    --muted-foreground: 30 10% 50%;
+    --accent: 28 80% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 10% 88%;
+    --input: 40 15% 96%;
+    --ring: 43 74% 49%;
+
+    --cinema-primary: 43 74% 49%;
+    --cinema-accent: 28 80% 45%;
+    --cinema-coral: 0 72% 55%;
+    --cinema-success: 142 70% 40%;
+    --cinema-warning: 38 92% 50%;
+    --cinema-gold: 43 74% 49%;
+
+    --seat-available: 40 10% 94%;
+    --seat-selected: 43 74% 49%;
+    --seat-sold: 0 40% 88%;
+    --seat-vip: 43 50% 92%;
+  }
+
+  /* Charcoal Dark Mode */
+  [data-theme="charcoal"][data-mode="dark"] {
     --background: 0 0% 10%;
     --background-elevated: 0 0% 14%;
     --foreground: 40 30% 96%;
-
-    /* Card & Surface - Warm Gray */
     --card: 0 0% 18%;
     --card-foreground: 40 30% 96%;
     --card-hover: 0 0% 22%;
-
     --popover: 0 0% 16%;
     --popover-foreground: 40 30% 96%;
-
-    /* Primary - Deep Gold */
-    --primary: 30 45% 65%;
+    --primary: 43 74% 49%;
     --primary-foreground: 0 0% 10%;
-    --primary-glow: 30 50% 70%;
-
-    /* Secondary - Dark surfaces */
+    --primary-hover: 43 74% 55%;
     --secondary: 0 0% 18%;
     --secondary-foreground: 40 30% 96%;
-
-    /* Muted text and surfaces */
     --muted: 0 0% 22%;
-    --muted-foreground: 0 0% 42%;
-
-    /* Accent - Copper for interactions */
-    --accent: 24 53% 51%;
-    --accent-foreground: 40 30% 96%;
-
-    /* Destructive - Red for errors */
+    --muted-foreground: 0 0% 55%;
+    --accent: 28 70% 50%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 72% 51%;
     --destructive-foreground: 40 30% 96%;
-
-    /* Cinema-specific colors */
-    --cinema-gold: 30 45% 65%;
-    --cinema-copper: 24 53% 51%;
-    --cinema-red: 5 54% 56%;
-    --cinema-success: 142 70% 45%;
-    --cinema-warning: 38 92% 50%;
-    --cinema-surface: 0 0% 18%;
-
-    /* Seat colors */
-    --seat-available: 0 0% 28%;
-    --seat-selected: 30 45% 65%;
-    --seat-sold: 0 50% 45%;
-    --seat-vip: 30 60% 55%;
-
-    /* Borders and inputs */
     --border: 0 0% 24%;
     --input: 0 0% 20%;
-    --ring: 30 45% 65%;
+    --ring: 43 74% 49%;
 
-    --radius: 0.75rem;
+    --cinema-primary: 43 74% 49%;
+    --cinema-accent: 28 70% 50%;
+    --cinema-coral: 5 54% 56%;
+    --cinema-success: 142 70% 45%;
+    --cinema-warning: 38 92% 50%;
+    --cinema-gold: 43 74% 49%;
 
-    /* Sidebar */
-    --sidebar-background: 0 0% 12%;
-    --sidebar-foreground: 40 20% 85%;
-    --sidebar-primary: 30 45% 65%;
-    --sidebar-primary-foreground: 0 0% 10%;
-    --sidebar-accent: 0 0% 18%;
-    --sidebar-accent-foreground: 40 30% 96%;
-    --sidebar-border: 0 0% 20%;
-    --sidebar-ring: 30 45% 65%;
+    --seat-available: 0 0% 28%;
+    --seat-selected: 43 74% 49%;
+    --seat-sold: 0 50% 35%;
+    --seat-vip: 43 50% 25%;
+  }
 
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(0 0% 10% / 0.95), hsl(0 0% 10% / 0.6));
-    --gradient-card: linear-gradient(180deg, hsl(0 0% 20%), hsl(0 0% 14%));
-    --gradient-gold: linear-gradient(135deg, hsl(30 45% 65%), hsl(24 53% 51%));
+  /* ============================================
+     THEME 3: Ocean (Blue & Cyan)
+     ============================================ */
+
+  /* Ocean Light Mode */
+  [data-theme="ocean"][data-mode="light"] {
+    --background: 204 100% 98%;
+    --background-elevated: 204 60% 97%;
+    --foreground: 210 40% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 40% 15%;
+    --card-hover: 204 80% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 40% 15%;
+    --primary: 199 89% 48%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 199 89% 42%;
+    --secondary: 204 60% 97%;
+    --secondary-foreground: 210 30% 45%;
+    --muted: 204 40% 95%;
+    --muted-foreground: 210 20% 50%;
+    --accent: 187 92% 40%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 204 30% 90%;
+    --input: 204 60% 97%;
+    --ring: 199 89% 48%;
+
+    --cinema-primary: 199 89% 48%;
+    --cinema-accent: 187 92% 40%;
+    --cinema-coral: 0 72% 55%;
+    --cinema-success: 160 84% 39%;
+    --cinema-warning: 38 92% 50%;
+    --cinema-gold: 45 93% 58%;
+
+    --seat-available: 204 40% 95%;
+    --seat-selected: 199 89% 48%;
+    --seat-sold: 0 40% 88%;
+    --seat-vip: 199 60% 92%;
+  }
+
+  /* Ocean Dark Mode */
+  [data-theme="ocean"][data-mode="dark"] {
+    --background: 210 50% 8%;
+    --background-elevated: 210 45% 12%;
+    --foreground: 200 20% 95%;
+    --card: 210 40% 14%;
+    --card-foreground: 200 20% 95%;
+    --card-hover: 210 40% 18%;
+    --popover: 210 45% 12%;
+    --popover-foreground: 200 20% 95%;
+    --primary: 199 85% 55%;
+    --primary-foreground: 210 50% 8%;
+    --primary-hover: 199 85% 60%;
+    --secondary: 210 35% 18%;
+    --secondary-foreground: 200 15% 80%;
+    --muted: 210 30% 22%;
+    --muted-foreground: 200 10% 55%;
+    --accent: 187 85% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 210 30% 22%;
+    --input: 210 35% 18%;
+    --ring: 199 85% 55%;
+
+    --cinema-primary: 199 85% 55%;
+    --cinema-accent: 187 85% 50%;
+    --cinema-coral: 0 70% 55%;
+    --cinema-success: 160 70% 45%;
+    --cinema-warning: 38 85% 55%;
+    --cinema-gold: 45 85% 60%;
+
+    --seat-available: 210 30% 22%;
+    --seat-selected: 199 85% 55%;
+    --seat-sold: 0 50% 30%;
+    --seat-vip: 199 50% 25%;
+  }
+
+  /* ============================================
+     THEME 4: Forest (Green & Lime)
+     ============================================ */
+
+  /* Forest Light Mode */
+  [data-theme="forest"][data-mode="light"] {
+    --background: 138 50% 98%;
+    --background-elevated: 138 40% 97%;
+    --foreground: 150 30% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 150 30% 15%;
+    --card-hover: 138 50% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 150 30% 15%;
+    --primary: 160 84% 39%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 160 84% 33%;
+    --secondary: 138 40% 97%;
+    --secondary-foreground: 150 20% 45%;
+    --muted: 138 30% 95%;
+    --muted-foreground: 150 15% 50%;
+    --accent: 84 80% 44%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 138 20% 90%;
+    --input: 138 40% 97%;
+    --ring: 160 84% 39%;
+
+    --cinema-primary: 160 84% 39%;
+    --cinema-accent: 84 80% 44%;
+    --cinema-coral: 0 72% 55%;
+    --cinema-success: 160 84% 39%;
+    --cinema-warning: 38 92% 50%;
+    --cinema-gold: 45 93% 58%;
+
+    --seat-available: 138 30% 95%;
+    --seat-selected: 160 84% 39%;
+    --seat-sold: 0 40% 88%;
+    --seat-vip: 160 50% 90%;
+  }
+
+  /* Forest Dark Mode */
+  [data-theme="forest"][data-mode="dark"] {
+    --background: 150 30% 7%;
+    --background-elevated: 150 25% 11%;
+    --foreground: 140 20% 95%;
+    --card: 150 25% 13%;
+    --card-foreground: 140 20% 95%;
+    --card-hover: 150 25% 17%;
+    --popover: 150 25% 11%;
+    --popover-foreground: 140 20% 95%;
+    --primary: 160 70% 48%;
+    --primary-foreground: 150 30% 7%;
+    --primary-hover: 160 70% 55%;
+    --secondary: 150 20% 16%;
+    --secondary-foreground: 140 15% 80%;
+    --muted: 150 15% 20%;
+    --muted-foreground: 140 10% 55%;
+    --accent: 84 70% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 150 15% 20%;
+    --input: 150 20% 16%;
+    --ring: 160 70% 48%;
+
+    --cinema-primary: 160 70% 48%;
+    --cinema-accent: 84 70% 50%;
+    --cinema-coral: 0 65% 55%;
+    --cinema-success: 160 70% 48%;
+    --cinema-warning: 38 85% 55%;
+    --cinema-gold: 45 85% 60%;
+
+    --seat-available: 150 15% 20%;
+    --seat-selected: 160 70% 48%;
+    --seat-sold: 0 50% 30%;
+    --seat-vip: 160 40% 22%;
+  }
+
+  /* ============================================
+     THEME 5: Sunset (Orange & Amber)
+     ============================================ */
+
+  /* Sunset Light Mode */
+  [data-theme="sunset"][data-mode="light"] {
+    --background: 48 100% 98%;
+    --background-elevated: 40 80% 97%;
+    --foreground: 25 30% 15%;
+    --card: 0 0% 100%;
+    --card-foreground: 25 30% 15%;
+    --card-hover: 40 60% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 25 30% 15%;
+    --primary: 24 95% 53%;
+    --primary-foreground: 0 0% 100%;
+    --primary-hover: 24 95% 46%;
+    --secondary: 40 80% 97%;
+    --secondary-foreground: 25 20% 45%;
+    --muted: 40 50% 95%;
+    --muted-foreground: 25 15% 50%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 30% 90%;
+    --input: 40 80% 97%;
+    --ring: 24 95% 53%;
+
+    --cinema-primary: 24 95% 53%;
+    --cinema-accent: 38 92% 50%;
+    --cinema-coral: 0 72% 55%;
+    --cinema-success: 160 84% 39%;
+    --cinema-warning: 38 92% 50%;
+    --cinema-gold: 45 93% 58%;
+
+    --seat-available: 40 50% 95%;
+    --seat-selected: 24 95% 53%;
+    --seat-sold: 0 40% 88%;
+    --seat-vip: 24 60% 92%;
+  }
+
+  /* Sunset Dark Mode */
+  [data-theme="sunset"][data-mode="dark"] {
+    --background: 20 30% 8%;
+    --background-elevated: 20 25% 12%;
+    --foreground: 30 20% 95%;
+    --card: 20 25% 14%;
+    --card-foreground: 30 20% 95%;
+    --card-hover: 20 25% 18%;
+    --popover: 20 25% 12%;
+    --popover-foreground: 30 20% 95%;
+    --primary: 24 90% 55%;
+    --primary-foreground: 20 30% 8%;
+    --primary-hover: 24 90% 60%;
+    --secondary: 20 20% 17%;
+    --secondary-foreground: 30 15% 80%;
+    --muted: 20 15% 21%;
+    --muted-foreground: 30 10% 55%;
+    --accent: 38 85% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 20 15% 21%;
+    --input: 20 20% 17%;
+    --ring: 24 90% 55%;
+
+    --cinema-primary: 24 90% 55%;
+    --cinema-accent: 38 85% 55%;
+    --cinema-coral: 0 70% 55%;
+    --cinema-success: 160 70% 45%;
+    --cinema-warning: 38 85% 55%;
+    --cinema-gold: 45 85% 60%;
+
+    --seat-available: 20 15% 21%;
+    --seat-selected: 24 90% 55%;
+    --seat-sold: 0 50% 30%;
+    --seat-vip: 24 50% 22%;
+  }
+
+  /* Sidebar variables (consistent across themes) */
+  :root {
+    --sidebar-background: var(--card);
+    --sidebar-foreground: var(--foreground);
+    --sidebar-primary: var(--primary);
+    --sidebar-primary-foreground: var(--primary-foreground);
+    --sidebar-accent: var(--secondary);
+    --sidebar-accent-foreground: var(--foreground);
+    --sidebar-border: var(--border);
+    --sidebar-ring: var(--ring);
   }
 }
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
 
 @layer base {
   * {
@@ -93,9 +444,10 @@
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Inter', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Custom scrollbar for dark theme */
+  /* Scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -106,7 +458,7 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background: hsl(var(--muted));
+    background: hsl(var(--border));
     border-radius: 4px;
   }
 
@@ -115,61 +467,94 @@
   }
 }
 
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
 @layer utilities {
+  .font-display {
+    font-family: 'Sora', sans-serif;
+  }
 
-  /* Text gradient utility - Gold */
-  .text-gradient-gold {
+  /* Text gradient */
+  .text-gradient-primary {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(30 45% 65%), hsl(24 53% 51%));
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
   }
 
-  /* Glow effects - Gold */
-  .glow-gold {
-    box-shadow: 0 0 30px hsl(30 45% 65% / 0.3);
+  /* Shadows */
+  .shadow-subtle {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   }
 
-  .glow-gold-sm {
-    box-shadow: 0 0 15px hsl(30 45% 65% / 0.25);
+  .shadow-medium {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   }
 
-  /* Card hover animation - Premium shadows */
-  .card-hover {
-    @apply transition-all duration-200 ease-out;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  .shadow-elevated {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   }
 
-  .card-hover:hover {
-    @apply -translate-y-1;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  .shadow-card {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
   }
 
-  /* Button styles - Gold primary with shine */
-  .btn-gold {
-    @apply bg-primary text-primary-foreground font-semibold;
-    background-image: linear-gradient(135deg, hsl(30 45% 65%), hsl(30 50% 60%));
-    box-shadow: inset 0 1px 0 hsl(30 50% 75% / 0.3);
+  [data-mode="dark"] .shadow-subtle {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
   }
 
-  .btn-gold:hover {
-    background-image: linear-gradient(135deg, hsl(24 53% 51%), hsl(24 53% 46%));
+  [data-mode="dark"] .shadow-medium {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
   }
 
-  .btn-gold:active {
-    transform: scale(0.98);
+  [data-mode="dark"] .shadow-elevated {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   }
 
-  /* Button styles - Copper outlined */
-  .btn-copper-outline {
-    @apply border-2 border-accent bg-transparent text-foreground font-semibold;
+  [data-mode="dark"] .shadow-card {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
   }
 
-  .btn-copper-outline:hover {
-    background: hsl(var(--accent) / 0.1);
+  /* Glass effect */
+  .glass-nav {
+    background: hsl(var(--background) / 0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid hsl(var(--border) / 0.5);
   }
 
-  /* Button glow effect */
-  .btn-glow:hover {
-    box-shadow: 0 0 25px hsl(30 45% 65% / 0.4);
+  /* Hero gradient */
+  .hero-gradient-light {
+    background: linear-gradient(to right,
+        hsl(var(--background) / 0.95) 0%,
+        hsl(var(--background) / 0.85) 40%,
+        hsl(var(--background) / 0.6) 70%,
+        transparent 100%);
+  }
+
+  /* Section gradients */
+  .section-gradient-1 {
+    background: radial-gradient(ellipse at top left, hsl(var(--primary) / 0.08), transparent 60%);
+  }
+
+  .section-gradient-2 {
+    background: radial-gradient(ellipse at top right, hsl(var(--accent) / 0.08), transparent 60%);
+  }
+
+  /* Border gradient accent */
+  .border-gradient-top {
+    position: relative;
+  }
+
+  .border-gradient-top::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+    border-radius: 3px 3px 0 0;
   }
 
   /* Seat styling */
@@ -178,45 +563,33 @@
   }
 
   .seat-available {
-    @apply bg-muted hover:bg-primary hover:text-primary-foreground;
+    background: hsl(var(--seat-available));
+    color: hsl(var(--muted-foreground));
+  }
+
+  .seat-available:hover {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
   }
 
   .seat-selected {
     background: hsl(var(--seat-selected));
-    @apply text-background;
+    color: hsl(var(--primary-foreground));
   }
 
   .seat-sold {
     background: hsl(var(--seat-sold));
-    @apply cursor-not-allowed opacity-70;
+    color: hsl(var(--destructive));
+    cursor: not-allowed;
+    opacity: 0.7;
   }
 
   .seat-vip {
-    border: 2px solid hsl(var(--cinema-gold));
+    background: hsl(var(--seat-vip));
+    border: 2px solid hsl(var(--primary));
   }
 
-  /* Glass effect */
-  .glass {
-    @apply backdrop-blur-md;
-    background: hsl(var(--background) / 0.8);
-  }
-
-  /* Hero gradient overlay */
-  .hero-gradient {
-    background: linear-gradient(to right,
-        hsl(0 0% 8% / 0.95) 0%,
-        hsl(0 0% 8% / 0.8) 50%,
-        hsl(0 0% 8% / 0.4) 100%);
-  }
-
-  /* Bottom gradient fade */
-  .gradient-fade-bottom {
-    background: linear-gradient(to top,
-        hsl(0 0% 8%) 0%,
-        transparent 100%);
-  }
-
-  /* Animate on scroll */
+  /* Animations */
   .fade-up {
     animation: fadeUp 0.6s ease-out forwards;
   }
@@ -233,25 +606,37 @@
     }
   }
 
-  /* Pulse animation for badges */
-  .pulse-badge {
-    animation: pulseBadge 2s ease-in-out infinite;
+  .transition-smooth {
+    transition: all 250ms ease-out;
   }
 
-  @keyframes pulseBadge {
+  /* Card hover */
+  .card-hover-enhanced {
+    @apply transition-all duration-250 ease-out;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
 
-    0%,
-    100% {
-      opacity: 1;
-    }
+  .card-hover-enhanced:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 32px hsl(var(--primary) / 0.15);
+  }
 
-    50% {
-      opacity: 0.7;
-    }
+  [data-mode="dark"] .card-hover-enhanced {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  [data-mode="dark"] .card-hover-enhanced:hover {
+    box-shadow: 0 12px 32px hsl(var(--primary) / 0.25);
+  }
+
+  /* Focus styles */
+  .focus-ring:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--primary));
   }
 }
 
-/* Animation delays for staggered effects */
+/* Animation delays */
 .delay-100 {
   animation-delay: 100ms;
 }
@@ -272,11 +657,7 @@
   animation-delay: 500ms;
 }
 
-/* ================================================
-   Phase 3: Micro-animations & Interaction Design
-   ================================================ */
-
-/* Shimmer skeleton loading effect */
+/* Shimmer animation */
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -289,69 +670,14 @@
 
 .animate-shimmer {
   background: linear-gradient(90deg,
-      hsl(0 0% 18%) 25%,
-      hsl(30 45% 65% / 0.15) 50%,
-      hsl(0 0% 18%) 75%);
+      hsl(var(--muted)) 25%,
+      hsl(var(--primary) / 0.1) 50%,
+      hsl(var(--muted)) 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
 }
 
-/* Gold spinner for loading states */
-@keyframes spin-gold {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.animate-spin-gold {
-  animation: spin-gold 800ms linear infinite;
-}
-
-/* Shake animation for errors */
-@keyframes shake {
-
-  0%,
-  100% {
-    transform: translateX(0);
-  }
-
-  20%,
-  60% {
-    transform: translateX(-5px);
-  }
-
-  40%,
-  80% {
-    transform: translateX(5px);
-  }
-}
-
-.animate-shake {
-  animation: shake 300ms ease-in-out;
-}
-
-/* Pulse ring for button clicks */
-@keyframes pulse-ring {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-.animate-pulse-ring {
-  animation: pulse-ring 500ms ease-out forwards;
-}
-
-/* Float animation for empty states */
+/* Float animation */
 @keyframes float {
 
   0%,
@@ -368,83 +694,7 @@
   animation: float 2s ease-in-out infinite;
 }
 
-/* Slide in from right for toasts */
-@keyframes slide-in-right {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.animate-slide-in-right {
-  animation: slide-in-right 300ms ease-out forwards;
-}
-
-/* Scale pulse for success feedback */
-@keyframes scale-pulse {
-
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-.animate-scale-pulse {
-  animation: scale-pulse 400ms ease-in-out;
-}
-
-/* Enhanced card hover with increased lift */
-.card-hover-enhanced {
-  @apply transition-all duration-200 ease-out;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
-}
-
-.card-hover-enhanced:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
-  filter: brightness(1.05);
-}
-
-.card-hover-enhanced:active {
-  transform: translateY(-4px) scale(0.98);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-}
-
-/* Button interaction enhancements */
-.btn-interactive {
-  @apply transition-all duration-150 ease-out;
-}
-
-.btn-interactive:hover {
-  transform: scale(1.02);
-}
-
-.btn-interactive:active {
-  transform: scale(0.98);
-}
-
-/* Focus accessibility - Gold ring */
-.focus-gold:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px hsl(var(--background)), 0 0 0 4px hsl(var(--primary));
-}
-
-/* Input focus states */
-.input-focus:focus {
-  border-color: hsl(var(--primary));
-  box-shadow: 0 0 0 4px hsl(30 45% 65% / 0.2);
-}
-
-/* Reduced motion support */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
 
   *,
@@ -454,11 +704,5 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  .animate-shimmer,
-  .animate-float,
-  .pulse-badge {
-    animation: none;
   }
 }

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { BookingProvider } from "@/contexts/BookingContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import Home from "./pages/Home";
 import MovieDetail from "./pages/MovieDetail";
 import Booking from "./pages/Booking";
@@ -29,41 +30,43 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <BookingProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner position="top-right" />
-          <BrowserRouter>
-            <ScrollToTop />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/movie/:id" element={<MovieDetail />} />
-              <Route path="/booking/:movieId" element={<Booking />} />
-              <Route path="/payment" element={<Payment />} />
-              <Route path="/payment/success" element={<PaymentSuccess />} />
-              <Route path="/my-tickets" element={<MyTickets />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
+    <ThemeProvider>
+      <AuthProvider>
+        <BookingProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner position="top-right" />
+            <BrowserRouter>
+              <ScrollToTop />
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/movie/:id" element={<MovieDetail />} />
+                <Route path="/booking/:movieId" element={<Booking />} />
+                <Route path="/payment" element={<Payment />} />
+                <Route path="/payment/success" element={<PaymentSuccess />} />
+                <Route path="/my-tickets" element={<MyTickets />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
 
-              <Route path="/admin" element={<AdminLayout />}>
-                <Route index element={<Dashboard />} />
-                <Route path="movies" element={<MovieManagement />} />
-                <Route path="showtimes" element={<ShowtimeManagement />} />
-                <Route path="theaters" element={<TheaterManagement />} />
-                <Route path="rooms" element={<RoomManagement />} />
-                <Route path="users" element={<UserManagement />} />
-                <Route path="reports" element={<Reports />} />
-                <Route path="settings" element={<Settings />} />
-              </Route>
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route index element={<Dashboard />} />
+                  <Route path="movies" element={<MovieManagement />} />
+                  <Route path="showtimes" element={<ShowtimeManagement />} />
+                  <Route path="theaters" element={<TheaterManagement />} />
+                  <Route path="rooms" element={<RoomManagement />} />
+                  <Route path="users" element={<UserManagement />} />
+                  <Route path="reports" element={<Reports />} />
+                  <Route path="settings" element={<Settings />} />
+                </Route>
 
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </BrowserRouter>
-        </TooltipProvider>
-      </BookingProvider>
-    </AuthProvider>
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </BrowserRouter>
+          </TooltipProvider>
+        </BookingProvider>
+      </AuthProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

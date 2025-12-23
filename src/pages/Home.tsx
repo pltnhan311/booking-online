@@ -23,18 +23,21 @@ export default function Home() {
       <QuickBookingBar />
 
       {/* Now Showing Section */}
-      <section id="now-showing" className="py-12 md:py-20">
+      <section id="now-showing" className="py-12 md:py-20 section-gradient-1 bg-background">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
               <div className="w-1 h-8 bg-primary rounded-full" />
-              <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+              <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
                 PHIM ĐANG CHIẾU
               </h2>
             </div>
-            <Link to="/movies" className="hidden md:flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+            <Link
+              to="/movies"
+              className="hidden md:flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors group"
+            >
               Xem tất cả
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
@@ -56,18 +59,21 @@ export default function Home() {
 
       {/* Coming Soon Section */}
       {comingSoonMovies.length > 0 && (
-        <section className="py-12 md:py-20">
+        <section className="py-12 md:py-20 section-gradient-2 bg-background">
           <div className="container">
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center gap-3">
-                <div className="w-1 h-8 bg-cinema-gold rounded-full" />
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+                <div className="w-1 h-8 bg-accent rounded-full" />
+                <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
                   PHIM SẮP CHIẾU
                 </h2>
               </div>
-              <Link to="/coming-soon" className="hidden md:flex items-center gap-1 text-sm text-muted-foreground hover:text-primary transition-colors">
+              <Link
+                to="/coming-soon"
+                className="hidden md:flex items-center gap-1 text-sm text-muted-foreground hover:text-accent transition-colors group"
+              >
                 Xem tất cả
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
 

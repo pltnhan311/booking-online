@@ -13,13 +13,13 @@ export default {
         md: "768px",
         lg: "1024px",
         xl: "1280px",
-        "2xl": "1400px",
+        "2xl": "1320px",
       },
     },
     extend: {
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Cinzel", "serif"],
+        display: ["Sora", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -30,7 +30,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
-          glow: "hsl(var(--primary-glow))",
+          hover: "hsl(var(--primary-hover))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -58,11 +58,12 @@ export default {
           hover: "hsl(var(--card-hover))",
         },
         cinema: {
-          gold: "hsl(var(--cinema-gold))",
-          copper: "hsl(var(--cinema-copper))",
-          red: "hsl(var(--cinema-red))",
+          purple: "hsl(var(--cinema-purple))",
+          teal: "hsl(var(--cinema-teal))",
+          coral: "hsl(var(--cinema-coral))",
           success: "hsl(var(--cinema-success))",
           warning: "hsl(var(--cinema-warning))",
+          gold: "hsl(var(--cinema-gold))",
           surface: "hsl(var(--cinema-surface))",
         },
         seat: {
@@ -81,11 +82,35 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        // Light theme specific colors
+        charcoal: "#1F2937",
+        slate: {
+          light: "#64748B",
+          DEFAULT: "#334155",
+          muted: "#94A3B8",
+        },
+        lavender: "#E9D5FF",
+        "pale-blue": "#DBEAFE",
+        "light-peach": "#FED7AA",
+        pearl: "#F8FAFC",
+        champagne: "#FEF3C7",
+        blush: "#FECDD3",
+        "soft-cyan": "#A5F3FC",
+        "soft-violet": "#DDD6FE",
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        "2xl": "1rem",
+        "3xl": "1.5rem",
+      },
+      spacing: {
+        "18": "4.5rem",
+        "22": "5.5rem",
+      },
+      transitionDuration: {
+        "250": "250ms",
       },
       keyframes: {
         "accordion-down": {
@@ -128,7 +153,22 @@ export default {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "hero-gradient": "linear-gradient(to right, hsl(0 0% 8% / 0.95), hsl(0 0% 8% / 0.6), transparent)",
+        "hero-gradient-light": "linear-gradient(to right, rgba(255,255,255,0.95) 40%, rgba(255,255,255,0.7) 70%, transparent)",
+        "gradient-hero": "linear-gradient(135deg, rgba(233,213,255,0.3), rgba(219,234,254,0.3), rgba(254,215,170,0.2))",
+        "gradient-card": "linear-gradient(160deg, #FFFFFF, #FAF5FF)",
+        "gradient-accent": "linear-gradient(90deg, #A5F3FC, #DDD6FE)",
+        "gradient-premium": "linear-gradient(120deg, #F8FAFC, #FEF3C7, #FECDD3)",
+        "gradient-border": "linear-gradient(90deg, #C4B5FD, #A5F3FC)",
+      },
+      boxShadow: {
+        "subtle": "0 1px 3px rgba(0,0,0,0.08)",
+        "medium": "0 4px 16px rgba(0,0,0,0.06)",
+        "elevated": "0 8px 32px rgba(0,0,0,0.08)",
+        "hover": "0 20px 40px rgba(139,92,246,0.12)",
+        "card": "0 2px 12px rgba(0,0,0,0.06)",
+        "card-hover": "0 12px 32px rgba(139,92,246,0.15)",
+        "button": "0 4px 12px rgba(139,92,246,0.25)",
+        "button-hover": "0 6px 20px rgba(139,92,246,0.35)",
       },
     },
   },

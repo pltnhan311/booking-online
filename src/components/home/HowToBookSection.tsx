@@ -22,15 +22,15 @@ const steps = [
 
 export function HowToBookSection() {
   return (
-    <section className="py-16 md:py-24 bg-secondary/30">
+    <section className="py-16 md:py-24 section-gradient-1 bg-background">
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-6">
             <div className="space-y-4">
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+              <h2 className="text-3xl md:text-4xl font-display font-bold text-foreground">
                 ĐẶT VÉ NHANH CHÓNG
-                <span className="text-gradient-lime block">CHỈ VỚI 3 BƯỚC</span>
+                <span className="text-gradient-primary block">CHỈ VỚI 3 BƯỚC</span>
               </h2>
               <p className="text-muted-foreground leading-relaxed">
                 Trải nghiệm điện ảnh tuyệt vời chưa bao giờ dễ dàng đến thế. Đặt vé ngay trên website VietCinema.
@@ -38,11 +38,11 @@ export function HowToBookSection() {
             </div>
 
             {/* Steps */}
-            <div className="space-y-6 pt-4">
+            <div className="space-y-4 pt-4">
               {steps.map((step, index) => (
                 <div
                   key={step.title}
-                  className="flex items-start gap-4 fade-up"
+                  className="flex items-start gap-4 p-4 bg-card rounded-2xl shadow-subtle transition-all duration-250 hover:shadow-medium fade-up"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
@@ -66,23 +66,23 @@ export function HowToBookSection() {
 
           {/* Right - Visual */}
           <div className="relative hidden lg:block">
-            <div className="absolute inset-0 bg-gradient-radial from-primary/20 via-transparent to-transparent rounded-full blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-radial from-primary/10 via-transparent to-transparent rounded-full blur-3xl" />
             <div className="relative grid grid-cols-2 gap-4">
               <div className="space-y-4">
-                <div className="aspect-[3/4] rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20 overflow-hidden">
+                <div className="aspect-[3/4] rounded-2xl bg-gradient-to-br from-primary/10 to-card border border-border overflow-hidden shadow-medium">
                   <img
                     src="https://image.tmdb.org/t/p/w500/8b8R8l88Qje9dn9OE8PY05Nxl1X.jpg"
                     alt="Movie poster"
-                    className="w-full h-full object-cover opacity-80"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </div>
               <div className="space-y-4 pt-8">
-                <div className="aspect-[3/4] rounded-2xl bg-gradient-to-br from-cinema-gold/20 to-cinema-gold/5 border border-cinema-gold/20 overflow-hidden">
+                <div className="aspect-[3/4] rounded-2xl bg-gradient-to-br from-accent/10 to-card border border-border overflow-hidden shadow-medium">
                   <img
                     src="https://image.tmdb.org/t/p/w500/kDp1vUBnMpe8ak4rjgl3cLELqjU.jpg"
                     alt="Movie poster"
-                    className="w-full h-full object-cover opacity-80"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               </div>

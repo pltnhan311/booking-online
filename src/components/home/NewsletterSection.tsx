@@ -11,7 +11,7 @@ export function NewsletterSection() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     // Mock submission
     setTimeout(() => {
       toast.success("Đăng ký thành công!", {
@@ -25,13 +25,17 @@ export function NewsletterSection() {
   return (
     <section className="py-12 md:py-16">
       <div className="container">
-        <div className="relative overflow-hidden rounded-2xl border-2 border-primary bg-gradient-to-r from-primary/10 via-background to-primary/5 p-8 md:p-12">
-          {/* Glow Effect */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-          
+        <div className="relative overflow-hidden rounded-3xl bg-card border border-border shadow-elevated p-8 md:p-12">
+          {/* Decorative gradient blobs */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-primary/20 to-accent/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+          <div className="absolute bottom-0 left-0 w-48 h-48 bg-gradient-to-tr from-accent/15 to-primary/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+
+          {/* Gradient top border */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
+
           <div className="relative flex flex-col md:flex-row items-center gap-8">
             <div className="flex-1 space-y-3 text-center md:text-left">
-              <h3 className="text-2xl md:text-3xl font-bold text-foreground">
+              <h3 className="text-2xl md:text-3xl font-display font-bold text-foreground">
                 ĐĂNG KÝ THÀNH VIÊN
               </h3>
               <p className="text-muted-foreground">
@@ -47,11 +51,17 @@ export function NewsletterSection() {
                   placeholder="Email của bạn..."
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="pl-10 h-12 bg-background/50 border-border"
+                  className="pl-10 h-12 bg-secondary border-border focus:border-primary"
                   required
                 />
               </div>
-              <Button type="submit" variant="hero" size="lg" disabled={isLoading}>
+              <Button
+                type="submit"
+                variant="hero"
+                size="lg"
+                disabled={isLoading}
+                className="h-12"
+              >
                 {isLoading ? "Đang gửi..." : "Đăng ký ngay"}
               </Button>
             </form>

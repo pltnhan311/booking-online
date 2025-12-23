@@ -4,13 +4,11 @@ import { ArrowLeft, MapPin, Calendar, Clock, Check } from "lucide-react";
 import { Layout } from "@/components/layout/Layout";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { 
-  getMovieById, 
-  theaters, 
-  showtimes as allShowtimes, 
+import {
+  getMovieById,
+  theaters,
+  showtimes as allShowtimes,
   seatConfig,
-  seatPrices,
-  generateSoldSeats,
   formatPrice,
   formatTime,
   Theater,
@@ -20,11 +18,27 @@ import { cn } from "@/lib/utils";
 
 type BookingStep = 1 | 2 | 3;
 
+const generateSoldSeats = (showtimeId: string): string[] => {
+  const seed = showtimeId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  const soldSeats: string[] = [];
+  const rows = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+
+  for (let i = 0; i < 15; i++) {
+    const rowIndex = (seed + i * 7) % rows.length;
+    const seatNum = ((seed + i * 11) % 12) + 1;
+    const seatId = `${rows[rowIndex]}${seatNum}`;
+    if (!soldSeats.includes(seatId)) {
+      soldSeats.push(seatId);
+    }
+  }
+  return soldSeats;
+};
+
 export default function Booking() {
   const { movieId } = useParams<{ movieId: string }>();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  
+
   const [step, setStep] = useState<BookingStep>(1);
   const [selectedTheater, setSelectedTheater] = useState<Theater | null>(null);
   const [selectedDate, setSelectedDate] = useState<string>("");
@@ -34,7 +48,6 @@ export default function Booking() {
 
   const movie = getMovieById(movieId || "");
 
-  // Generate next 7 days
   const dates = useMemo(() => {
     return Array.from({ length: 7 }, (_, i) => {
       const date = new Date();
@@ -48,7 +61,6 @@ export default function Booking() {
     });
   }, []);
 
-  // Filter showtimes for selected movie, theater, and date
   const availableShowtimes = useMemo(() => {
     if (!selectedTheater || !selectedDate) return [];
     return allShowtimes.filter(
@@ -59,7 +71,6 @@ export default function Booking() {
     );
   }, [movieId, selectedTheater, selectedDate]);
 
-  // Handle theater selection
   const handleSelectTheater = (theater: Theater) => {
     setSelectedTheater(theater);
     setSelectedDate(dates[0].value);
@@ -68,7 +79,6 @@ export default function Booking() {
     setStep(2);
   };
 
-  // Handle showtime selection
   const handleSelectShowtime = (showtime: Showtime) => {
     setSelectedShowtime(showtime);
     setSoldSeats(generateSoldSeats(showtime.id));
@@ -76,20 +86,18 @@ export default function Booking() {
     setStep(3);
   };
 
-  // Handle seat selection
   const handleSeatClick = (seatId: string) => {
     if (soldSeats.includes(seatId)) return;
-    
+
     setSelectedSeats((prev) => {
       if (prev.includes(seatId)) {
         return prev.filter((s) => s !== seatId);
       }
-      if (prev.length >= 8) return prev; // Max 8 seats
+      if (prev.length >= 8) return prev;
       return [...prev, seatId];
     });
   };
 
-  // Calculate total price
   const totalPrice = useMemo(() => {
     if (!selectedShowtime) return 0;
     return selectedSeats.reduce((total, seatId) => {
@@ -99,9 +107,7 @@ export default function Booking() {
     }, 0);
   }, [selectedSeats, selectedShowtime]);
 
-  // Proceed to payment
   const handleProceedToPayment = () => {
-    // Store booking data in sessionStorage for payment page
     sessionStorage.setItem(
       "pendingBooking",
       JSON.stringify({
@@ -132,7 +138,7 @@ export default function Booking() {
     <Layout>
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <div className="border-b border-border bg-secondary/30">
+        <div className="border-b border-border bg-card shadow-subtle">
           <div className="container py-4">
             <div className="flex items-center gap-4">
               <Button
@@ -146,21 +152,29 @@ export default function Booking() {
                 <h1 className="font-semibold text-foreground">{movie.title}</h1>
                 <p className="text-sm text-muted-foreground">Đặt vé xem phim</p>
               </div>
+
               {/* Step Indicator */}
-              <div className="hidden md:flex items-center gap-2">
-                {[1, 2, 3].map((s) => (
-                  <div
-                    key={s}
-                    className={cn(
-                      "w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors",
-                      s === step
-                        ? "bg-primary text-primary-foreground"
-                        : s < step
-                        ? "bg-cinema-success text-background"
-                        : "bg-muted text-muted-foreground"
+              <div className="hidden md:flex items-center gap-3">
+                {[1, 2, 3].map((s, index) => (
+                  <div key={s} className="flex items-center">
+                    <div
+                      className={cn(
+                        "w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-250",
+                        s === step && "bg-primary text-primary-foreground shadow-md",
+                        s < step && "bg-card border-2 border-primary text-primary",
+                        s > step && "bg-card border-2 border-border text-muted-foreground"
+                      )}
+                    >
+                      {s < step ? <Check className="w-5 h-5" /> : s}
+                    </div>
+                    {index < 2 && (
+                      <div
+                        className={cn(
+                          "w-12 h-0.5 mx-2",
+                          s < step ? "bg-primary" : "bg-border"
+                        )}
+                      />
                     )}
-                  >
-                    {s < step ? <Check className="w-4 h-4" /> : s}
                   </div>
                 ))}
               </div>
@@ -176,7 +190,7 @@ export default function Booking() {
               {step === 1 && (
                 <div className="space-y-6 animate-fade-in">
                   <div>
-                    <h2 className="text-xl font-semibold text-foreground mb-2">Chọn rạp chiếu</h2>
+                    <h2 className="text-xl font-display font-semibold text-foreground mb-2">Chọn rạp chiếu</h2>
                     <p className="text-muted-foreground text-sm">Bước 1/3</p>
                   </div>
 
@@ -186,17 +200,17 @@ export default function Booking() {
                         key={theater.id}
                         onClick={() => handleSelectTheater(theater)}
                         className={cn(
-                          "w-full p-4 rounded-xl border text-left transition-all hover:border-primary",
+                          "w-full p-5 rounded-2xl border-2 text-left transition-all duration-250 bg-card shadow-subtle hover:shadow-medium",
                           selectedTheater?.id === theater.id
                             ? "border-primary bg-primary/5"
-                            : "border-border bg-card"
+                            : "border-border hover:border-primary"
                         )}
                       >
                         <div className="flex items-start justify-between">
                           <div>
                             <h3 className="font-semibold text-foreground">{theater.name}</h3>
-                            <div className="flex items-center gap-2 mt-1 text-sm text-muted-foreground">
-                              <MapPin className="w-4 h-4" />
+                            <div className="flex items-center gap-2 mt-1.5 text-sm text-muted-foreground">
+                              <MapPin className="w-4 h-4 text-primary" />
                               <span>{theater.location.address}, {theater.location.district}</span>
                             </div>
                             <div className="flex flex-wrap gap-2 mt-3">
@@ -207,7 +221,7 @@ export default function Booking() {
                               ))}
                             </div>
                           </div>
-                          <span className="text-sm text-muted-foreground">{theater.distance}</span>
+                          <span className="text-sm text-muted-foreground font-medium">{theater.distance}</span>
                         </div>
                       </button>
                     ))}
@@ -219,14 +233,14 @@ export default function Booking() {
               {step === 2 && selectedTheater && (
                 <div className="space-y-6 animate-fade-in">
                   <div>
-                    <h2 className="text-xl font-semibold text-foreground mb-2">Chọn suất chiếu</h2>
+                    <h2 className="text-xl font-display font-semibold text-foreground mb-2">Chọn suất chiếu</h2>
                     <p className="text-muted-foreground text-sm">Bước 2/3 • {selectedTheater.name}</p>
                   </div>
 
                   {/* Date Selector */}
                   <div className="space-y-3">
-                    <h3 className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                      <Calendar className="w-4 h-4" />
+                    <h3 className="text-sm font-medium text-muted-foreground flex items-center gap-2 uppercase tracking-wide">
+                      <Calendar className="w-4 h-4 text-primary" />
                       Chọn ngày
                     </h3>
                     <div className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0">
@@ -238,14 +252,14 @@ export default function Booking() {
                             setSelectedShowtime(null);
                           }}
                           className={cn(
-                            "shrink-0 px-4 py-3 rounded-lg border text-center min-w-[80px] transition-all",
+                            "shrink-0 px-4 py-3 rounded-xl border-2 text-center min-w-[90px] transition-all duration-250 bg-card",
                             selectedDate === date.value
-                              ? "border-primary bg-primary/10 text-primary"
-                              : "border-border bg-card hover:border-primary/50"
+                              ? "border-primary bg-primary/5 text-primary"
+                              : "border-border hover:border-primary/50"
                           )}
                         >
                           <p className="text-xs text-muted-foreground">{date.dayLabel}</p>
-                          <p className="font-semibold">{date.dateLabel}</p>
+                          <p className="font-semibold text-foreground">{date.dateLabel}</p>
                         </button>
                       ))}
                     </div>
@@ -253,8 +267,8 @@ export default function Booking() {
 
                   {/* Showtimes */}
                   <div className="space-y-3">
-                    <h3 className="text-sm font-medium text-muted-foreground flex items-center gap-2">
-                      <Clock className="w-4 h-4" />
+                    <h3 className="text-sm font-medium text-muted-foreground flex items-center gap-2 uppercase tracking-wide">
+                      <Clock className="w-4 h-4 text-primary" />
                       Suất chiếu
                     </h3>
                     {availableShowtimes.length > 0 ? (
@@ -266,26 +280,28 @@ export default function Booking() {
                               key={showtime.id}
                               onClick={() => handleSelectShowtime(showtime)}
                               className={cn(
-                                "p-4 rounded-lg border text-center transition-all",
+                                "p-4 rounded-xl border-2 text-center transition-all duration-250 bg-card",
                                 selectedShowtime?.id === showtime.id
-                                  ? "border-primary bg-primary/10"
-                                  : "border-border bg-card hover:border-primary/50"
+                                  ? "border-primary bg-primary/5"
+                                  : "border-border hover:border-primary/50"
                               )}
                             >
-                              <p className="text-lg font-bold text-foreground">{formatTime(showtime.dateTime)}</p>
+                              <p className="text-xl font-bold text-foreground">{formatTime(showtime.dateTime)}</p>
                               <p className="text-xs text-muted-foreground mt-1">{screen?.name}</p>
                               <Badge variant="secondary" className="text-xs mt-2">
                                 {screen?.type}
                               </Badge>
-                              <p className="text-sm text-primary mt-2">{formatPrice(showtime.price)}</p>
+                              <p className="text-sm text-primary font-semibold mt-2">{formatPrice(showtime.price)}</p>
                             </button>
                           );
                         })}
                       </div>
                     ) : (
-                      <p className="text-muted-foreground py-8 text-center">
-                        Không có suất chiếu nào trong ngày này
-                      </p>
+                      <div className="bg-card rounded-2xl p-8 text-center shadow-subtle">
+                        <p className="text-muted-foreground">
+                          Không có suất chiếu nào trong ngày này
+                        </p>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -295,7 +311,7 @@ export default function Booking() {
               {step === 3 && selectedShowtime && selectedTheater && (
                 <div className="space-y-6 animate-fade-in">
                   <div>
-                    <h2 className="text-xl font-semibold text-foreground mb-2">Chọn ghế ngồi</h2>
+                    <h2 className="text-xl font-display font-semibold text-foreground mb-2">Chọn ghế ngồi</h2>
                     <p className="text-muted-foreground text-sm">
                       Bước 3/3 • {formatTime(selectedShowtime.dateTime)} • {selectedTheater.name}
                     </p>
@@ -303,17 +319,17 @@ export default function Booking() {
 
                   {/* Screen Indicator */}
                   <div className="text-center py-4">
-                    <div className="w-3/4 mx-auto h-2 bg-primary/30 rounded-full mb-2" />
-                    <p className="text-xs text-muted-foreground">MÀN HÌNH</p>
+                    <div className="w-3/4 mx-auto h-3 bg-gradient-to-r from-primary via-accent to-primary rounded-full mb-2 shadow-sm opacity-70" />
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide font-medium">Màn hình</p>
                   </div>
 
                   {/* Seat Map */}
-                  <div className="overflow-x-auto">
+                  <div className="bg-card rounded-2xl p-6 shadow-subtle overflow-x-auto">
                     <div className="flex flex-col items-center gap-2 min-w-fit mx-auto">
                       {seatConfig.rows.map((row) => (
-                        <div key={row} className="flex items-center gap-1">
-                          <span className="w-6 text-center text-xs font-medium text-muted-foreground">{row}</span>
-                          <div className="flex gap-1">
+                        <div key={row} className="flex items-center gap-1.5">
+                          <span className="w-6 text-center text-xs font-semibold text-muted-foreground">{row}</span>
+                          <div className="flex gap-1.5">
                             {Array.from({ length: seatConfig.seatsPerRow }, (_, i) => {
                               const seatNum = i + 1;
                               const seatId = `${row}${seatNum}`;
@@ -323,7 +339,7 @@ export default function Booking() {
                               const isAisle = seatConfig.aisles.includes(seatNum);
 
                               return (
-                                <div key={seatId} className={cn("flex", isAisle && "mr-4")}>
+                                <div key={seatId} className={cn("flex", isAisle && "mr-6")}>
                                   <button
                                     onClick={() => handleSeatClick(seatId)}
                                     disabled={isSold}
@@ -341,7 +357,7 @@ export default function Booking() {
                               );
                             })}
                           </div>
-                          <span className="w-6 text-center text-xs font-medium text-muted-foreground">{row}</span>
+                          <span className="w-6 text-center text-xs font-semibold text-muted-foreground">{row}</span>
                         </div>
                       ))}
                     </div>
@@ -350,19 +366,19 @@ export default function Booking() {
                   {/* Legend */}
                   <div className="flex flex-wrap justify-center gap-6 py-4">
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-t-lg bg-muted" />
+                      <div className="seat seat-available w-6 h-6" />
                       <span className="text-xs text-muted-foreground">Trống</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-t-lg bg-seat-selected" />
+                      <div className="seat seat-selected w-6 h-6" />
                       <span className="text-xs text-muted-foreground">Đang chọn</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-t-lg bg-seat-sold opacity-70" />
+                      <div className="seat seat-sold w-6 h-6" />
                       <span className="text-xs text-muted-foreground">Đã bán</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-t-lg bg-muted border-2 border-cinema-gold" />
+                      <div className="seat seat-vip w-6 h-6" />
                       <span className="text-xs text-muted-foreground">VIP ({formatPrice(selectedShowtime.priceVip)})</span>
                     </div>
                   </div>
@@ -372,17 +388,24 @@ export default function Booking() {
 
             {/* Sidebar - Booking Summary */}
             <div className="lg:w-80 shrink-0">
-              <div className="sticky top-24 bg-card rounded-xl border border-border p-4 space-y-4">
+              <div className="sticky top-24 bg-card rounded-2xl border border-border shadow-medium p-5 space-y-4">
                 {/* Movie Info */}
                 <div className="flex gap-3">
                   <img
                     src={movie.posterUrl}
                     alt={movie.title}
-                    className="w-16 h-24 object-cover rounded-lg"
+                    className="w-16 h-24 object-cover rounded-xl shadow-subtle"
                   />
                   <div className="flex-1">
                     <h3 className="font-semibold text-foreground text-sm line-clamp-2">{movie.title}</h3>
-                    <Badge variant="secondary" className="text-xs mt-1">
+                    <Badge
+                      variant={
+                        movie.ageRating.includes("18") ? "destructive" :
+                          movie.ageRating.includes("16") ? "warning" :
+                            "success"
+                      }
+                      className="mt-2 text-xs font-bold"
+                    >
                       {movie.ageRating}
                     </Badge>
                   </div>
@@ -434,8 +457,8 @@ export default function Booking() {
 
                 {/* Action Button */}
                 <Button
-                  variant="hero"
                   className="w-full"
+                  size="lg"
                   disabled={step < 3 || selectedSeats.length === 0}
                   onClick={handleProceedToPayment}
                 >

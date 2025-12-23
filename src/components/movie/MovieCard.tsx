@@ -8,9 +8,10 @@ import { cn } from "@/lib/utils";
 interface MovieCardProps {
   movie: Movie;
   className?: string;
+  featured?: boolean;
 }
 
-export function MovieCard({ movie, className }: MovieCardProps) {
+export function MovieCard({ movie, className, featured = false }: MovieCardProps) {
   const navigate = useNavigate();
 
   const handleBookingClick = (e: React.MouseEvent) => {
@@ -22,14 +23,18 @@ export function MovieCard({ movie, className }: MovieCardProps) {
   return (
     <Link
       to={`/movie/${movie.id}`}
-      className={cn("group relative card-hover-enhanced block cursor-pointer rounded-xl focus-gold", className)}
+      className={cn(
+        "group relative block cursor-pointer rounded-2xl focus-ring bg-card transition-all duration-250 ease-out card-hover-enhanced",
+        featured && "border-gradient-top",
+        className
+      )}
     >
       {/* Poster Container */}
-      <div className="relative aspect-[2/3] rounded-xl overflow-hidden bg-muted">
+      <div className="relative aspect-[2/3] rounded-xl overflow-hidden bg-muted m-2">
         <img
           src={movie.posterUrl}
           alt={movie.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105"
           loading="lazy"
         />
 
@@ -39,12 +44,8 @@ export function MovieCard({ movie, className }: MovieCardProps) {
             {movie.badges.map((badge) => (
               <Badge
                 key={badge}
-                variant={badge === "HOT" ? "destructive" : "secondary"}
-                className={cn(
-                  "text-[10px] px-1.5 py-0.5",
-                  badge === "HOT" && "bg-cinema-red pulse-badge",
-                  badge === "18+" && "bg-destructive"
-                )}
+                variant={badge === "HOT" ? "hot" : "secondary"}
+                className="text-[10px] px-2 py-0.5"
               >
                 {badge}
               </Badge>
@@ -55,26 +56,20 @@ export function MovieCard({ movie, className }: MovieCardProps) {
         {/* Age Rating */}
         <div className="absolute top-2 right-2">
           <Badge
-            variant="outline"
-            className={cn(
-              "text-[10px] px-1.5 py-0.5 border-none font-bold",
-              movie.ageRating === "C18" && "bg-destructive text-foreground",
-              movie.ageRating === "C16" && "bg-cinema-warning text-background",
-              movie.ageRating === "C13" && "bg-cinema-gold text-background",
-              movie.ageRating === "P" && "bg-cinema-success text-background",
-              movie.ageRating === "T18" && "bg-destructive text-foreground",
-              movie.ageRating === "T16" && "bg-cinema-warning text-background",
-              movie.ageRating === "T13" && "bg-cinema-gold text-background"
-            )}
+            variant={
+              movie.ageRating.includes("18") ? "destructive" :
+                movie.ageRating.includes("16") ? "warning" :
+                  "success"
+            }
+            className="text-[10px] px-2 py-0.5 font-bold"
           >
             {movie.ageRating}
           </Badge>
         </div>
 
-        {/* Overlay on Hover */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+        {/* Hover Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
           <Button
-            variant="default"
             className="w-full"
             size="sm"
             onClick={handleBookingClick}
@@ -85,7 +80,7 @@ export function MovieCard({ movie, className }: MovieCardProps) {
       </div>
 
       {/* Info */}
-      <div className="mt-3 space-y-1">
+      <div className="p-3 pt-2 space-y-2">
         <h3 className="font-semibold text-foreground line-clamp-1 group-hover:text-primary transition-colors">
           {movie.title}
         </h3>
@@ -95,16 +90,16 @@ export function MovieCard({ movie, className }: MovieCardProps) {
             <Clock className="w-3 h-3" />
             <span>{movie.duration} phút</span>
           </div>
-          <span>•</span>
+          <span className="text-border">•</span>
           <span className="line-clamp-1">{movie.genre.slice(0, 2).join(", ")}</span>
         </div>
 
         <div className="flex items-center gap-1">
           <Star className="w-4 h-4 text-cinema-gold fill-cinema-gold" />
           <span className="font-semibold text-foreground">{movie.rating}</span>
+          <span className="text-xs text-muted-foreground">/10</span>
         </div>
       </div>
     </Link>
   );
 }
-

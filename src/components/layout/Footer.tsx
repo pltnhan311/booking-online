@@ -3,14 +3,14 @@ import { Ticket, Facebook, Youtube, Mail, Phone, MapPin } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-secondary/50 border-t border-border">
+    <footer className="bg-card border-t border-border">
       {/* Main Footer */}
       <div className="container mx-auto py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+            <Link to="/" className="flex items-center gap-2 group">
+              <div className="w-10 h-10 bg-primary rounded-lg flex items-center justify-center shadow-md">
                 <Ticket className="w-6 h-6 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold text-foreground">
@@ -20,22 +20,22 @@ export function Footer() {
             <p className="text-muted-foreground text-sm leading-relaxed">
               Trải nghiệm điện ảnh đỉnh cao với hệ thống rạp chiếu phim hiện đại nhất Việt Nam.
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+                className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-250"
               >
                 <Facebook className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+                className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-250"
               >
                 <Youtube className="w-5 h-5" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
+                className="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-250"
               >
                 <Mail className="w-5 h-5" />
               </a>
@@ -101,17 +101,23 @@ export function Footer() {
             <h4 className="font-semibold text-foreground">CHĂM SÓC KHÁCH HÀNG</h4>
             <ul className="space-y-3">
               <li className="flex items-center gap-3 text-sm">
-                <Phone className="w-4 h-4 text-primary" />
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Phone className="w-4 h-4 text-primary" />
+                </div>
                 <span className="text-muted-foreground">Hotline: <strong className="text-foreground">1900 1234</strong></span>
               </li>
               <li className="flex items-center gap-3 text-sm">
-                <Mail className="w-4 h-4 text-primary" />
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                  <Mail className="w-4 h-4 text-primary" />
+                </div>
                 <a href="mailto:support@vietcinema.vn" className="text-muted-foreground hover:text-primary transition-colors">
                   support@vietcinema.vn
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm">
-                <MapPin className="w-4 h-4 text-primary mt-0.5" />
+                <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  <MapPin className="w-4 h-4 text-primary" />
+                </div>
                 <span className="text-muted-foreground">
                   Tầng 5, Tòa nhà Cinema, Hà Nội
                 </span>
